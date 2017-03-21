@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "typeRoots": [
+      "../node_modules/@types",
+      "../node_modules/angular2-google-maps"
+    ],
+    "types" : [
+      "core-js",
+      "node",
+      "googlemaps"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
