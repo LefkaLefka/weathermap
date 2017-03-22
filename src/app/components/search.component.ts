@@ -25,28 +25,23 @@ export class SearchComponent implements OnInit {
         this.zoom = 4;
         this.latitude = 0;
         this.longitude = 0;
-
         //create search FormControl
         this.searchControl = new FormControl();
-
         //set current position
         this.setCurrentPosition();
-
         //load Places Autocomplete
         this.mapsAPILoader.load().then(() => {
-            let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+            let autoComplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
                 types: ["(cities)"]
             });
-            autocomplete.addListener("place_changed", () => {
+            autoComplete.addListener("place_changed", () => {
                 this.ngZone.run(() => {
                     //get the place result
-                    let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
+                    let place: google.maps.places.PlaceResult = autoComplete.getPlace();
                     //verify result
                     if (place.geometry === undefined || place.geometry === null) {
                         return;
                     }
-
                     //set latitude, longitude and zoom
                     this.latitude = place.geometry.location.lat();
                     this.longitude = place.geometry.location.lng();
@@ -62,6 +57,7 @@ export class SearchComponent implements OnInit {
                 this.latitude = position.coords.latitude;
                 this.longitude = position.coords.longitude;
                 this.zoom = 12;
+                this.getPlace();
             });
         }
     }
@@ -70,5 +66,25 @@ export class SearchComponent implements OnInit {
         this.latitude = $event.coords.lat;
         this.longitude = $event.coords.lng;
         this.zoom = 12;
+        this.getPlace();
+    }
+
+    private getPlace() {
+        let geoCoder = new google.maps.Geocoder();
+        let geoLocate = new google.maps.LatLng(this.latitude, this.longitude);
+        geoCoder.geocode({location: geoLocate}, ((results, status) => {
+            let result;
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results.length > 1) {
+                    result = results[1];
+                } else {
+                    result = results[0];
+                }
+                result = result.formatted_address;
+            } else {
+                result = "Error";
+            }
+            this.searchControl.setValue(result);
+        }).bind(this));
     }
 }
