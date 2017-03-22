@@ -9,12 +9,14 @@ var gulp = require("gulp"),
     sourcemaps = require("gulp-sourcemaps"),
     rigger = require("gulp-rigger"),
     cssmin = require("gulp-clean-css"),
-    rimraf = require("rimraf"),
+    del = require("del"),
     browserSync = require("browser-sync"),
     imagemin = require("gulp-imagemin"),
     pngquant = require("imagemin-pngquant"),
     minifycss = require("gulp-minify-css"),
-    ghPages = require('gulp-gh-pages'),
+    ghPages = require("gulp-gh-pages"),
+    embedTemplates = require("gulp-angular-embed-templates"),
+    babelify = require("babelify"),
     reload = browserSync.reload;
     // historyApiFallback = require("connect-history-api-fallback"),
     // bs = browserSync.create();
@@ -27,8 +29,8 @@ var path = {
         lib: "./dist/lib/"
     },
     src: {
-        html: "./src/**/*.html",
-        script: "./src/main.ts",
+        html: "./src/*.html",
+        script: "./src/**/*.ts",
         style: "./src/main.css",
         img: "./src/img/**/*.*"
     },
@@ -37,6 +39,14 @@ var path = {
         script: "./src/app/**/*.ts",
         style: "./src/**/*.css",
         img: "./src/img/**/*.*"
+    },
+    temp: {
+        root: "./.temp",
+        script: "./.temp/main.ts"
+    },
+    deploy: {
+        temp: "./.publish",
+        publish: "./dist/**/*"
     },
     clean: "./dist/"
 };
@@ -53,7 +63,7 @@ var configServer = {
     logPrefix: "Server start " + Date.now()
 };
 gulp.task("deploying", function() {
-    return gulp.src("./dist/**/*")
+    return gulp.src(path.deploy.publish)
         .pipe(ghPages());
 });
 gulp.task("html:build", function() {
@@ -63,17 +73,25 @@ gulp.task("html:build", function() {
         .pipe(reload({stream: true}));
 });
 gulp.task("script:build", function() {
-    return browserify({
-        basedir: ".",
-        debug: true,
-        entries: [path.src.script],
-        cache: {},
-        packageCache: {}
-    })
-        .plugin(tsify)
-        .bundle()
-        .pipe(source("main.js"))
-        .pipe(gulp.dest(path.build.script));
+
+    return gulp.src(path.src.script)
+        .pipe(embedTemplates({ sourceType: "ts" }))
+        .pipe(gulp.dest(path.temp.root))
+        .on("end", function () {
+            var dev = browserify({
+                basedir: ".",
+                debug: true,
+                entries: [path.temp.script],
+                cache: {},
+                packageCache: {}
+            })
+                .plugin(tsify, { target: "es6", module: "commonjs" })
+                .transform(babelify, { extensions: [".ts"] })
+                .bundle()
+                .pipe(source("main.js"))
+                .pipe(gulp.dest(path.build.script));
+            return dev;
+        });
 });
 gulp.task("style:build", function() {
     gulp.src(path.src.style)
@@ -100,8 +118,8 @@ gulp.task("image:build", function() {
 gulp.task("lib:copy", function() {
     return browserify([
         "node_modules/core-js/client/shim.min.js",
-        "node_modules/reflect-metadata/Reflect.js",
         "node_modules/zone.js/dist/zone.js",
+        "node_modules/reflect-metadata/Reflect.js",
         "node_modules/angular2-google-maps/core/index.js"
     ])
         .bundle()
@@ -123,16 +141,19 @@ gulp.task("webserver", function() {
     browserSync(configServer);
     // bs.init(configServer);
 });
-gulp.task("clean", function(cb) {
-    rimraf(path.clean, cb);
+gulp.task("clean", function() {
+    return del([path.clean, path.deploy.temp, path.temp.root]);
 });
 /**
  * Видаляємо папку .publish після завершення задачі "deploying"
  */
-gulp.task("deploying:clean", ["deploying"], function(cb) {
-    rimraf("./.publish", cb);
+gulp.task("publish:clean", ["deploying"], function() {
+    del(path.deploy.temp);
+});
+gulp.task("temp:clean", ["build"], function() {
+    del(path.temp.root);
 });
 // gulp.task("build", ["html:build", "script:build", "style:build", "image:build", "lib:copy"]);
-gulp.task("deploy", ["deploying", "deploying:clean"]);
+gulp.task("deploy", ["deploying", "publish:clean"]);
 gulp.task("build", ["html:build", "script:build", "style:build", "lib:copy"]);
-gulp.task("default", ["build", "webserver", "watch"]);
+gulp.task("default", ["build", "webserver", "watch", "temp:clean"]);
