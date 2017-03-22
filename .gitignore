@@ -1,5 +1,0 @@
-.idea/
-*.db
-node_modules/
-*.map
-src/**/*.js
