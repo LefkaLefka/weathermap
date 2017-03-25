@@ -117,6 +117,7 @@ gulp.task("image:build", function() {
 });
 gulp.task("lib:copy", function() {
     return browserify([
+        "node_modules/rxjs/Rx.js",
         "node_modules/core-js/client/shim.min.js",
         "node_modules/zone.js/dist/zone.js",
         "node_modules/reflect-metadata/Reflect.js",
