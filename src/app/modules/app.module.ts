@@ -1,9 +1,12 @@
 import { NgModule } from "@angular/core";
 import { AgmCoreModule } from "angular2-google-maps/core";
+import { HttpModule } from "@angular/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "../components/app.component";
 import { SearchComponent } from "../components/search.component";
+import { OpenWeatherService } from "../services/open-weather.service";
+import { WeatherComponent } from "../components/weather.component";
 
 @NgModule({
     imports: [
@@ -13,11 +16,16 @@ import { SearchComponent } from "../components/search.component";
             }),
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpModule
     ],
     declarations: [
         AppComponent,
-        SearchComponent
+        SearchComponent,
+        WeatherComponent
+    ],
+    providers: [
+        OpenWeatherService
     ],
     bootstrap: [ AppComponent ]
 })
