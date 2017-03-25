@@ -151,10 +151,10 @@ gulp.task("clean", function() {
 gulp.task("publish:clean", ["deploying"], function() {
     del(path.deploy.temp);
 });
-gulp.task("temp:clean", ["build"], function() {
+gulp.task("temp:clean", ["html:build", "script:build", "style:build", "lib:copy"], function() {
     del(path.temp.root);
 });
 // gulp.task("build", ["html:build", "script:build", "style:build", "image:build", "lib:copy"]);
 gulp.task("deploy", ["deploying", "publish:clean"]);
-gulp.task("build", ["html:build", "script:build", "style:build", "lib:copy"]);
+gulp.task("build", ["html:build", "script:build", "style:build", "lib:copy", "temp:clean"]);
 gulp.task("default", ["build", "webserver", "watch", "temp:clean"]);
