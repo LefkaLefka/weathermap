@@ -1,10 +1,12 @@
 import { ElementRef, NgZone, ViewChild, Component, OnInit } from "@angular/core";
 import { MapsAPILoader, MouseEvent } from "angular2-google-maps/core";
 import { FormControl } from "@angular/forms";
+import { OpenWeatherService } from "../services/open-weather.service";
 
 @Component({
     selector: "search",
-    templateUrl: "../templates/search.component.html"
+    templateUrl: "../templates/search.component.html",
+    providers: [ OpenWeatherService ]
 })
 
 export class SearchComponent implements OnInit {
@@ -18,7 +20,8 @@ export class SearchComponent implements OnInit {
 
     constructor(
         private mapsAPILoader: MapsAPILoader,
-        private ngZone: NgZone) {}
+        private ngZone: NgZone,
+        private openWeatherService: OpenWeatherService) {}
 
     ngOnInit() {
         //set google maps defaults
@@ -43,9 +46,7 @@ export class SearchComponent implements OnInit {
                         return;
                     }
                     //set latitude, longitude and zoom
-                    this.latitude = place.geometry.location.lat();
-                    this.longitude = place.geometry.location.lng();
-                    this.zoom = 12;
+                    this.updateCoordinate(place.geometry.location.lat(), place.geometry.location.lng());
                 });
             });
         });
@@ -54,18 +55,14 @@ export class SearchComponent implements OnInit {
     private setCurrentPosition() {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
-                this.latitude = position.coords.latitude;
-                this.longitude = position.coords.longitude;
-                this.zoom = 12;
+                this.updateCoordinate(position.coords.latitude, position.coords.longitude);
                 this.getPlace();
             });
         }
     }
 
     mapClicked($event: MouseEvent) {
-        this.latitude = $event.coords.lat;
-        this.longitude = $event.coords.lng;
-        this.zoom = 12;
+        this.updateCoordinate($event.coords.lat, $event.coords.lng);
         this.getPlace();
     }
 
@@ -86,5 +83,20 @@ export class SearchComponent implements OnInit {
             }
             this.searchControl.setValue(result);
         }).bind(this));
+    }
+
+    private updateCoordinate(lat: number, lng: number) {
+        this.latitude = lat;
+        this.longitude = lng;
+        this.zoom = 12;
+
+        this.getWeather();
+    }
+
+    private getWeather() {
+        this.openWeatherService.getWeather(this.latitude, this.longitude)
+            .subscribe((data) => {
+                console.log(data);
+            });
     }
 }
