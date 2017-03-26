@@ -7,6 +7,7 @@ import { AppComponent } from "../components/app.component";
 import { SearchComponent } from "../components/search.component";
 import { OpenWeatherService } from "../services/open-weather.service";
 import { WeatherComponent } from "../components/weather.component";
+import { DarkSkyService } from "../services/dark-sky.service";
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { WeatherComponent } from "../components/weather.component";
         WeatherComponent
     ],
     providers: [
-        OpenWeatherService
+        OpenWeatherService,
+        DarkSkyService
     ],
     bootstrap: [ AppComponent ]
 })
