@@ -52,10 +52,11 @@ var path = {
 };
 var configServer = {
     server: {
-        baseDir: [
-            "./dist/"
-        ]
-        // middleware: [ historyApiFallback() ]
+        baseDir: "./dist/"
+        // middleware: function (req, res, next) {
+        //     res.setHeader('Access-Control-Allow-Origin', '*');
+        //     next();
+        // }
     },
     tunnel: true,
     host: "localhost",
@@ -73,7 +74,6 @@ gulp.task("html:build", function() {
         .pipe(reload({stream: true}));
 });
 gulp.task("script:build", function() {
-
     return gulp.src(path.src.script)
         .pipe(embedTemplates({ sourceType: "ts" }))
         .pipe(gulp.dest(path.temp.root))
@@ -139,7 +139,7 @@ gulp.task("watch", function() {
     });
 });
 gulp.task("webserver", function() {
-    browserSync(configServer);
+    browserSync.init(configServer);
     // bs.init(configServer);
 });
 gulp.task("clean", function() {
