@@ -2,11 +2,14 @@ import { ElementRef, NgZone, ViewChild, Component, OnInit } from "@angular/core"
 import { MapsAPILoader, MouseEvent } from "angular2-google-maps/core";
 import { FormControl } from "@angular/forms";
 import { OpenWeatherService } from "../services/open-weather.service";
+import { DarkSkyService } from "../services/dark-sky.service";
 
 @Component({
     selector: "search",
     templateUrl: "../templates/search.component.html",
-    providers: [ OpenWeatherService ]
+    providers: [
+        OpenWeatherService,
+        DarkSkyService ]
 })
 
 export class SearchComponent implements OnInit {
@@ -21,7 +24,8 @@ export class SearchComponent implements OnInit {
     constructor(
         private mapsAPILoader: MapsAPILoader,
         private ngZone: NgZone,
-        private openWeatherService: OpenWeatherService) {}
+        private openWeatherService: OpenWeatherService,
+        private darkSkyService: DarkSkyService) {}
 
     ngOnInit() {
         //set google maps defaults
@@ -94,7 +98,11 @@ export class SearchComponent implements OnInit {
     }
 
     private getWeather() {
-        this.openWeatherService.getWeather(this.latitude, this.longitude)
+        // this.openWeatherService.getWeather(this.latitude, this.longitude)
+        //     .subscribe((data) => {
+        //         console.log(data);
+        //     });
+        this.darkSkyService.getWeather(this.latitude, this.longitude)
             .subscribe((data) => {
                 console.log(data);
             });
