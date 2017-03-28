@@ -92,7 +92,7 @@ export class SearchComponent implements OnInit {
     private updateCoordinate(lat: number, lng: number) {
         this.latitude = lat;
         this.longitude = lng;
-        this.zoom = 12;
+        this.zoom = 9;
 
         this.getWeather();
     }
