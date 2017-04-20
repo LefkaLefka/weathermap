@@ -54,7 +54,7 @@ var configServer = {
     server: {
         baseDir: "./dist/"
         // middleware: function (req, res, next) {
-        //     res.setHeader('Access-Control-Allow-Origin', '*');
+        //     res.setHeader("Access-Control-Allow-Origin", "*");
         //     next();
         // }
     },
@@ -105,8 +105,8 @@ gulp.task("style:build", function() {
         .pipe(reload({stream: true}));
 });
 gulp.task("image:build", function() {
-    gulp.src(path.src.img) //Выберем наши картинки
-        .pipe(imagemin({ //Сожмем их
+    gulp.src(path.src.img)
+        .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
             use: [pngquant()],
@@ -132,7 +132,7 @@ gulp.task("watch", function() {
         gulp.start("html:build");
     });
     watch([path.watch.script], function(event, cb) {
-        gulp.start("script:build");
+        gulp.start("script:build", "temp:clean");
     });
     watch([path.watch.style], function(event, cb) {
         gulp.start("style:build");
@@ -151,7 +151,7 @@ gulp.task("clean", function() {
 gulp.task("publish:clean", ["deploying"], function() {
     del(path.deploy.temp);
 });
-gulp.task("temp:clean", ["html:build", "script:build", "style:build", "lib:copy"], function() {
+gulp.task("temp:clean", ["script:build", "lib:copy"], function() {
     del(path.temp.root);
 });
 // gulp.task("build", ["html:build", "script:build", "style:build", "image:build", "lib:copy"]);
