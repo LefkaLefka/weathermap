@@ -81,7 +81,7 @@ export class SearchComponent implements OnInit {
             let result;
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results.length > 1) {
-                    result = results[1];
+                    result = results[2];
                 } else {
                     result = results[0];
                 }
