@@ -18,8 +18,6 @@ var gulp = require("gulp"),
     embedTemplates = require("gulp-angular-embed-templates"),
     babelify = require("babelify"),
     reload = browserSync.reload;
-    // historyApiFallback = require("connect-history-api-fallback"),
-    // bs = browserSync.create();
 var path = {
     build: {
         html: "./dist/",
@@ -129,7 +127,7 @@ gulp.task("lib:copy", function() {
 });
 gulp.task("watch", function() {
     watch([path.watch.html], function(event, cb) {
-        gulp.start("html:build");
+        gulp.start("html:build", "script:build", "temp:clean");
     });
     watch([path.watch.script], function(event, cb) {
         gulp.start("script:build", "temp:clean");
