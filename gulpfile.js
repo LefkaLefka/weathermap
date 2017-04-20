@@ -24,20 +24,20 @@ var path = {
     build: {
         html: "./dist/",
         script: "./dist/js/",
-        style: "./dist/style",
+        style: "./dist/style/",
         img: "./dist/img/",
         lib: "./dist/lib/"
     },
     src: {
         html: "./src/*.html",
         script: "./src/**/*.ts",
-        style: "./src/main.css",
+        style: "./src/main.scss",
         img: "./src/img/**/*.*"
     },
     watch: {
         html: "./src/**/*.html",
         script: "./src/app/**/*.ts",
-        style: "./src/**/*.css",
+        style: "./src/**/*.scss",
         img: "./src/img/**/*.*"
     },
     temp: {
@@ -95,9 +95,9 @@ gulp.task("script:build", function() {
 });
 gulp.task("style:build", function() {
     gulp.src(path.src.style)
-        .pipe(minifycss())
         .pipe(sourcemaps.init())
         .pipe(sass())
+        .pipe(minifycss())
         .pipe(prefixer())
         .pipe(cssmin())
         .pipe(sourcemaps.write())
