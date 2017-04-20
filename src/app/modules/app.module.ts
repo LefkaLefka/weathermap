@@ -13,9 +13,11 @@ import { GoogleChart } from "../directives/angular2-google-chart.directive";
 @NgModule({
     imports: [
         AgmCoreModule.forRoot({
-              apiKey: "AIzaSyCbLvTnXR_ekev6d3tmIlSbMjDaPzp4g00",
-              libraries: ["places"]
-            }),
+            apiKey: "AIzaSyCbLvTnXR_ekev6d3tmIlSbMjDaPzp4g00",
+            libraries: ["places"],
+            language: "en",
+            region: "UA"
+        }),
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
