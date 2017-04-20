@@ -3,16 +3,23 @@
     <head>
         <title>Weather</title>
         <meta charset="UTF-8">
-        <!--<link rel="stylesheet" href="style/main.css">-->
-        <link rel="stylesheet" href="https://lefkalefka.github.io/weathermap/style/main.css">
+        <link rel="stylesheet" href="style/main.css">
+        <!--<link rel="stylesheet" href="https://lefkalefka.github.io/weathermap/style/main.css">-->
     </head>
     <body>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script>
+            // !important: You want to give this variable(var googleLoaded = false;). This is used to run multiple chart in your jade.
+            var googleLoaded = false;
+            // !important: Define which chart packages to preload.Because this package uses ChartWrappers you can use any chart type that Google supports, but if it // isn't loaded it will load it on demand.
+            var googleChartsPackagesToLoad = ['geochart'];
+        </script>
         <base href="/">
         <my-app>Loading...</my-app>
 
-        <!--<script type="text/javascript" src="lib/lib.js"></script>-->
-        <script type="text/javascript" src="https://lefkalefka.github.io/weathermap/lib/lib.js"></script>
-        <!--<script type="text/javascript" src="js/main.js"></script>-->
-        <script type="text/javascript" src="https://lefkalefka.github.io/weathermap/js/main.js"></script>
+        <script type="text/javascript" src="lib/lib.js"></script>
+        <!--<script type="text/javascript" src="https://lefkalefka.github.io/weathermap/lib/lib.js"></script>-->
+        <script type="text/javascript" src="js/main.js"></script>
+        <!--<script type="text/javascript" src="https://lefkalefka.github.io/weathermap/js/main.js"></script>-->
     </body>
 </html>
