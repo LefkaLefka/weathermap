@@ -60,7 +60,6 @@ export class SearchComponent implements OnInit {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                // console.log(position.coords.latitude + " " + position.coords.longitude);
                 this.updateCoordinate(position.coords.latitude, position.coords.longitude);
                 this.getPlace();
             },
@@ -107,9 +106,9 @@ export class SearchComponent implements OnInit {
         //     .subscribe((data) => {
         //         console.log(data);
         //     });
-        this.darkSkyService.getWeather(this.latitude, this.longitude)
-            .subscribe((data) => {
-                console.log(data);
-            });
+        // this.darkSkyService.getWeather(this.latitude, this.longitude)
+        //     .subscribe((data) => {
+        //         console.log(data);
+        //     });
     }
 }
