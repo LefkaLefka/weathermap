@@ -1,14 +1,12 @@
 import { ElementRef, NgZone, ViewChild, Component, OnInit } from "@angular/core";
 import { MapsAPILoader, MouseEvent } from "angular2-google-maps/core";
 import { FormControl } from "@angular/forms";
-// import { OpenWeatherService } from "../services/open-weather.service";
 import { DarkSkyService } from "../services/dark-sky.service";
 
 @Component({
     selector: "search",
     templateUrl: "../templates/search.component.html",
     providers: [
-        // OpenWeatherService,
         DarkSkyService ]
 })
 
@@ -17,6 +15,7 @@ export class SearchComponent implements OnInit {
     public longitude: number;
     public zoom: number;
     public searchControl: FormControl;
+    public data: any = null;
 
     @ViewChild("search")
     public searchElementRef: ElementRef;
@@ -24,7 +23,6 @@ export class SearchComponent implements OnInit {
     constructor(
         private mapsAPILoader: MapsAPILoader,
         private ngZone: NgZone,
-        // private openWeatherService: OpenWeatherService,
         private darkSkyService: DarkSkyService) {}
 
     ngOnInit() {
@@ -106,9 +104,12 @@ export class SearchComponent implements OnInit {
         //     .subscribe((data) => {
         //         console.log(data);
         //     });
-        // this.darkSkyService.getWeather(this.latitude, this.longitude)
-        //     .subscribe((data) => {
-        //         console.log(data);
-        //     });
+        // console.log(this.bubble_ChartData);
+
+        this.darkSkyService.getWeather(this.latitude, this.longitude)
+            .subscribe((data) => {
+                this.data = data;
+                console.log(this.data);
+            });
     }
 }
