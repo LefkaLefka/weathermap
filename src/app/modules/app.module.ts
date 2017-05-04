@@ -6,7 +6,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "../components/app.component";
 import { SearchComponent } from "../components/search.component";
 import { OpenWeatherService } from "../services/open-weather.service";
-import { WeatherComponent } from "../components/weather.component";
+import { DayWeatherComponent } from "../components/day-weather.component";
 import { DarkSkyService } from "../services/dark-sky.service";
 import { GoogleChart } from "../directives/angular2-google-chart.directive";
 
@@ -26,7 +26,7 @@ import { GoogleChart } from "../directives/angular2-google-chart.directive";
     declarations: [
         AppComponent,
         SearchComponent,
-        WeatherComponent,
+        DayWeatherComponent,
         GoogleChart,
     ],
     providers: [
