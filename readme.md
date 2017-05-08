@@ -3,7 +3,6 @@
 
 ### Team
   - Олексій Вельченко (https://github.com/LefkaLefka)
-  - Людмила Собченко (https://github.com/L-Sobchenko)
 
 ##### Наявний функціонал:
   - Вибір міста на карті/через input
