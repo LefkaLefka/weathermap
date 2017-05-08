@@ -1,0 +1,26 @@
+<div class="week-weather" *ngIf="weekData">
+    <div class="days">
+        <ul>
+            <li class="day"
+                *ngFor="let dayOfWeek of weekData"
+                (click)="onSelect(dayOfWeek)"
+                [class.selected]="dayOfWeek === selectedDay">
+                <div>{{dayOfWeek.time}}</div></li>
+        </ul>
+    </div>
+    <div *ngIf="selectedDay"
+         class="day-weather">
+        <h1 >{{selectedDay.time}}</h1>
+        <div>
+            <p>Dew point
+                <br>
+                <span>{{selectedDay.dewPoint}} °C</span>
+            </p>
+            <div [className]="classes">
+                <ul>
+                    <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
