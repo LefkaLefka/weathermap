@@ -9,6 +9,7 @@ import { OpenWeatherService } from "../services/open-weather.service";
 import { DayWeatherComponent } from "../components/day-weather.component";
 import { DarkSkyService } from "../services/dark-sky.service";
 import { GoogleChart } from "../directives/angular2-google-chart.directive";
+import { WeekWeatherComponent } from "../components/week-weather.component"
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { GoogleChart } from "../directives/angular2-google-chart.directive";
         AppComponent,
         SearchComponent,
         DayWeatherComponent,
+        WeekWeatherComponent,
         GoogleChart,
     ],
     providers: [
