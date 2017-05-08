@@ -1,7 +1,10 @@
 @import "./app/styles/search.component.scss";
+@import "./app/styles/day-weather.component.scss";
+@import "./app/styles/week-weather.component.scss";
 // font-family: "Open Sans";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
 body {
   margin: 0;
+  font-family: "Open Sans";
 }
