@@ -7,7 +7,8 @@ import { DarkSkyService } from "../services/dark-sky.service";
     selector: "search",
     templateUrl: "../templates/search.component.html",
     providers: [
-        DarkSkyService ]
+        DarkSkyService
+    ]
 })
 
 export class SearchComponent implements OnInit {
@@ -109,7 +110,6 @@ export class SearchComponent implements OnInit {
         this.darkSkyService.getWeather(this.latitude, this.longitude)
             .subscribe((data) => {
                 this.data = data;
-                console.log(this.data);
             });
     }
 }
