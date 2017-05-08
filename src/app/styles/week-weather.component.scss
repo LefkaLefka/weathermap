@@ -1,0 +1,153 @@
+.week-weather {
+  background: linear-gradient(to bottom, #f3f1ed, #f9facb);
+  white-space: nowrap;
+  overflow:hidden;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  .days {
+    width: 30%;
+    display: inline-block;
+    margin-top: 2px;
+    margin-right: 1%;
+    ul {
+      padding: 0;
+      margin: 0;
+      font-weight: 700;
+    }
+    .day {
+      list-style-type: none;
+      text-align: center;
+      box-shadow: 0 0 6px rgba(0,0,0,0.5);
+      line-height: 60px;
+      height: 60px;
+      margin-bottom: 7px;
+      cursor: pointer;
+    }
+    .selected {
+      box-shadow: inset -1px -2px 2px rgba(0,0,0,0.15), inset -1px 2px 2px rgba(0,0,0,0.15);
+      border: 30px solid #FAEBD7;
+      border-right-color: transparent;
+      height: 0;
+      cursor: pointer;
+      div {
+        position: relative;
+        margin: -30px auto auto auto;
+        cursor: pointer;
+      }
+    }
+  }
+  .day-weather {
+    width: 67%;
+    box-shadow: 0 0 6px rgba(0,0,0,0.5);
+    display: inline-block;
+    position: absolute;
+    h1 {
+      text-align: center;
+    }
+    p {
+      width: 150px;
+      font-size: 30px;
+      margin-left: 30px;
+      text-align: center;
+      span {
+        font-weight: 700;
+        font-size: 45px;
+      }
+    }
+    @mixin moonShadow($shadow) {
+      box-shadow: -$shadow 0 0 0 #9098a1 inset;
+    }
+    .phase1 {
+      @include moonShadow(100px);
+    }
+    .phase2 {
+      @include moonShadow(80px);
+    }
+    .phase3 {
+      @include moonShadow(60px);
+    }
+    .phase4 {
+      @include moonShadow(35px);
+    }
+    .phase5 {
+      @include moonShadow(0px);
+    }
+    .phase6 {
+      @include moonShadow(-35px);
+    }
+    .phase7 {
+      @include moonShadow(-60px);
+    }
+    .phase8 {
+      @include moonShadow(-80px);
+    }
+    .moon {
+      position: absolute;
+      right: 50px;
+      top: 95px;
+      width: 100px;
+      height: 100px;
+      background: #c7cbd0;
+      border-radius: 50%;
+      -webkit-backface-visibility: hidden;
+      transition: transform 0.2s ease-in-out;
+      li {
+        position: absolute;
+        list-style: none;
+        background: #737277;
+        border-radius: 50%;
+      }
+      li:nth-child(1) {
+        left: 12px;
+        top: 30px;
+        width: 25px;
+        height: 25px;
+        box-shadow: inset 6px -2px 0 0px #414043;
+      }
+      li:nth-child(2) {
+        left: 75px;
+        top: 25px;
+        width: 12px;
+        height: 12px;
+        box-shadow: inset 3px -1px 0 0px #414043;
+      }
+      li:nth-child(3) {
+        left: 50px;
+        top: 75px;
+        width: 12px;
+        height: 12px;
+        box-shadow: inset 3px -1px 0 0px #414043;
+      }
+      li:nth-child(4) {
+        left: 25px;
+        top: 75px;
+        width: 6px;
+        height: 6px;
+        box-shadow: inset 2.4px -0.8px 0 0px #414043;
+      }
+      li:nth-child(5) {
+        left: 45px;
+        top: 8px;
+        width: 6px;
+        height: 6px;
+        box-shadow: inset 2.4px -0.8px 0 0px #414043;
+      }
+      li:nth-child(6) {
+        left: 60px;
+        top: 45px;
+        width: 6px;
+        height: 6px;
+        box-shadow: inset 2.4px -0.8px 0 0px #414043;
+      }
+      li:nth-child(7) {
+        left: 90px;
+        top: 50px;
+        width: 6px;
+        height: 6px;
+        box-shadow: inset 2.4px -0.8px 0 0px #414043;
+      }
+    }
+  }
+}
