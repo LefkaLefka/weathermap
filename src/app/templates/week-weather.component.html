@@ -11,16 +11,42 @@
     <div *ngIf="selectedDay"
          class="day-weather">
         <h1 >{{selectedDay.time}}</h1>
-        <div>
-            <p>Dew point
-                <br>
-                <span>{{selectedDay.dewPoint}} °C</span>
-            </p>
-            <div [className]="classes">
-                <ul>
-                    <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-                </ul>
-            </div>
+        <p class="text left">Dew point
+            <br>
+            <span>{{selectedDay.dewPoint}} °C</span>
+            <br>
+            <br>
+            Wind speed
+            <br>
+            <span>{{selectedDay.windSpeed}} m/s</span>
+        </p>
+        <div class="icon">
+            <img src="img/{{selectedDay.icon}}.png" alt="{{selectedDay.summary}}">
         </div>
+        <div [className]="classes">
+            <ul>
+                <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+            </ul>
+        </div>
+        <p class="text right top">Pressure
+            <br>
+            <span>{{selectedDay.pressure}} Pa</span>
+        </p>
+        <figure class="sunLeft">
+            <img class="sun left" src="img/sunrise.png" alt="sunrise icon">
+            <figcaption>{{selectedDay.sunriseTime}}</figcaption>
+        </figure>
+        <p class="text tempLeft">Min temperature
+            <br>
+            <span>{{selectedDay.temperatureMin}} °C</span>
+        </p>
+        <p class="text tempRight">Max temperature
+            <br>
+            <span>{{selectedDay.temperatureMax}} °C</span>
+        </p>
+        <figure class="sunRight">
+            <img class="sun right" src="img/sunset.png" alt="sunset icon">
+            <figcaption>{{selectedDay.sunsetTime}}</figcaption>
+        </figure>
     </div>
 </div>
