@@ -154,5 +154,5 @@ gulp.task("temp:clean", ["script:build", "lib:copy"], function() {
 });
 // gulp.task("build", ["html:build", "script:build", "style:build", "image:build", "lib:copy"]);
 gulp.task("deploy", ["deploying", "publish:clean"]);
-gulp.task("build", ["html:build", "script:build", "style:build", "lib:copy", "temp:clean"]);
+gulp.task("build", ["html:build", "script:build", "style:build", "lib:copy", "image:build", "temp:clean"]);
 gulp.task("default", ["build", "webserver", "watch", "temp:clean"]);
