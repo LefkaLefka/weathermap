@@ -24,7 +24,7 @@ export class DayWeatherComponent {
 
             for (let i = 0; i < 25; ++i) {
                 let buffArray = [];
-                buffArray.push(buffData[i].apparentTemperature.toString().slice(0, -3) + " °C");
+                buffArray.push(Math.floor(buffData[i].apparentTemperature).toString() + " °C");
                 buffArray.push(new Date(buffData[i].time * 1000));
                 buffArray.push(buffData[i].apparentTemperature);
                 buffArray.push(buffData[i].summary);
