@@ -10,26 +10,29 @@ export class WeekWeatherComponent {
     _weekData: any;
     selectedDay: any;
     classes: string = "moon";
+
     @Input()
     set weekData(data: any) {
         if(data) {
             this._weekData = data.daily.data;
-            console.log(this._weekData);
             for(let i = 0; i < 8; ++i) {
-                let date = new Date(this._weekData[i].time * 1000);
-                this._weekData[i].time = this.dateFormat(date, "dddd, mmmm dS, yyyy");
+                this._weekData[i].time = this.dateFormat(new Date(this._weekData[i].time * 1000), "dddd, mmmm dS, yyyy");
+                this._weekData[i].sunriseTime = this.dateFormat(new Date(this._weekData[i].sunriseTime * 1000),
+                    "h:MM:ss TT");
+                this._weekData[i].sunsetTime = this.dateFormat(new Date(this._weekData[i].sunsetTime * 1000),
+                    "h:MM:ss TT");
             }
+            this.selectedDay = null;
         }
     }
+
     get weekData() {
         return this._weekData;
     }
+
     onSelect(dayWeather: any) {
         this.selectedDay = dayWeather;
         let moonPhase = this.selectedDay.moonPhase;
-
-        console.log(moonPhase);
-
         if(moonPhase >= 0 && moonPhase < 0.125) {
             this.classes = "moon phase1";
         } else
