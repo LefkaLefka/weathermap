@@ -14,7 +14,7 @@ import { WeekWeatherComponent } from "../components/week-weather.component"
 @NgModule({
     imports: [
         AgmCoreModule.forRoot({
-            apiKey: "AIzaSyCbLvTnXR_ekev6d3tmIlSbMjDaPzp4g00",
+            apiKey: "AIzaSyBc-P8U-bHtVVN4xm78vuZt6t_qlT4sdNw",
             libraries: ["places"],
             language: "en",
             region: "UA"
