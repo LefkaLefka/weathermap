@@ -21,7 +21,7 @@
             <span>{{selectedDay.windSpeed}} m/s</span>
         </p>
         <div class="icon">
-            <img src="weathermap/img/{{selectedDay.icon}}.png" alt="{{selectedDay.summary}}">
+            <img src="img/{{selectedDay.icon}}.png" alt="{{selectedDay.summary}}">
         </div>
         <div [className]="classes">
             <ul>
@@ -33,7 +33,7 @@
             <span>{{selectedDay.pressure}} Pa</span>
         </p>
         <figure class="sunLeft">
-            <img class="sun left" src="weathermap/img/sunrise.png" alt="sunrise icon">
+            <img class="sun left" src="img/sunrise.png" alt="sunrise icon">
             <figcaption>{{selectedDay.sunriseTime}}</figcaption>
         </figure>
         <p class="text tempLeft">Min temperature
@@ -45,7 +45,7 @@
             <span>{{selectedDay.temperatureMax}} °C</span>
         </p>
         <figure class="sunRight">
-            <img class="sun right" src="weathermap/img/sunset.png" alt="sunset icon">
+            <img class="sun right" src="img/sunset.png" alt="sunset icon">
             <figcaption>{{selectedDay.sunsetTime}}</figcaption>
         </figure>
     </div>
