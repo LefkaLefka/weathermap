@@ -51,28 +51,28 @@
       box-shadow: -$shadow 0 0 0 #9098a1 inset;
     }
     .phase1 {
-      @include moonShadow(100px);
+      @include moonShadow(-80px);
     }
     .phase2 {
-      @include moonShadow(80px);
-    }
-    .phase3 {
-      @include moonShadow(60px);
-    }
-    .phase4 {
-      @include moonShadow(35px);
-    }
-    .phase5 {
-      @include moonShadow(0px);
-    }
-    .phase6 {
-      @include moonShadow(-35px);
-    }
-    .phase7 {
       @include moonShadow(-60px);
     }
+    .phase3 {
+      @include moonShadow(-35px);
+    }
+    .phase4 {
+      @include moonShadow(0px);
+    }
+    .phase5 {
+      @include moonShadow(35px);
+    }
+    .phase6 {
+      @include moonShadow(60px);
+    }
+    .phase7 {
+      @include moonShadow(80px);
+    }
     .phase8 {
-      @include moonShadow(-80px);
+      @include moonShadow(100px);
     }
     .moon {
       position: absolute;
